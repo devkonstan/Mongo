@@ -6,7 +6,7 @@ public class MysqlConnection {
 
     private static String url = "jdbc:mysql://localhost:3306/Users?useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     private static String login = "root";
-    private static String password = "klocek73";
+    private static String password = "pass123";
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url,login,password);
