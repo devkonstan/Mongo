@@ -1,18 +1,20 @@
+package UserDataBase;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
 
-public class InitMysqlDatabase {
+public class InitMySqlDatabase {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public InitMysqlDatabase() {
+    public InitMySqlDatabase() {
         createUserTable();
     }
 
     public void createUserTable() {
-        String createUserTable = "CREATE TABLE IF NOT EXISTS Users(" +
+        String dropTable="DROP TABLE users";
+        String createTable = "CREATE TABLE IF NOT EXISTS users(" +
                 "ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                 "EMAIL VARCHAR(25) NOT NULL UNIQUE," +
                 "PASSWORD VARCHAR(50) NOT NULL," +
@@ -22,13 +24,13 @@ public class InitMysqlDatabase {
                 "CREATED_AT TIMESTAMP NOT NULL" +
                 ");";
 
-        Connection connection = null;
-        Statement statement = null;
-
+        Connection connection;
+        Statement statement;
         try {
-            connection = MysqlConnection.getConnection();
+            connection = MySqlConnection.getConnection();
             statement = connection.createStatement();
-            statement.execute(createUserTable);
+            statement.execute(dropTable);
+            statement.execute(createTable);
         } catch (SQLException e) {
             logger.warning("Cannot create User table: " + e);
         }

@@ -1,3 +1,5 @@
+package UserDataBase;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -7,6 +9,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
+
         this.userRepository = userRepository;
     }
 
@@ -17,6 +20,7 @@ public class UserService {
         if (!userRepository.isEmailExist(user.getEmail())) {
             userRepository.insert(user);
         }
+
     }
 
     public List<User> getUsers() {
@@ -24,6 +28,7 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
+
         return userRepository.findUser(email);
     }
 

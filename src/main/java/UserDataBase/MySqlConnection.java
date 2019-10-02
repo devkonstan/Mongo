@@ -1,9 +1,10 @@
+package UserDataBase;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MysqlConnection {
-
+public class MySqlConnection {
     private static String url = "jdbc:mysql://localhost:3306/Users?useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     private static String login = "root";
     private static String password = "pass123";

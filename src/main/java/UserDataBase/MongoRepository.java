@@ -1,3 +1,5 @@
+package UserDataBase;
+
 import com.google.gson.Gson;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
@@ -8,8 +10,8 @@ import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class MongoRepository implements UserRepository
-{ //klasa majaca dostep do bd
+//klasa majaca dostep do bd
+public class MongoRepository implements UserRepository {
     private Gson gson = new Gson();
     MongoCollection<Document> users;
 
@@ -21,11 +23,13 @@ public class MongoRepository implements UserRepository
         users.drop();
     }
 
+    @Override
     public void insert(User user) {
         users.insertOne(Document.parse(gson.toJson(user)));
 
     }
 
+    @Override
     public List<User> findAll() {
         FindIterable<Document> AllUsers = users.find();
         List<User> userList = new ArrayList<>();
@@ -37,12 +41,13 @@ public class MongoRepository implements UserRepository
         return userList;
     }
 
+    @Override
     public boolean isEmailExist(String email) {
         Document foundUsers = users.find(eq("email", email)).first();
-
         return foundUsers != null;
     }
 
+    @Override
     public User findUser(String email) {
 
         Document foundUser = users.find(eq("email", email)).first();
@@ -50,15 +55,16 @@ public class MongoRepository implements UserRepository
             return gson.fromJson(foundUser.toJson(), User.class);
         } else
             return null;
-//        return users.find(Filters.eq("email", email)).first(); //inny sposob
     }
 
+    @Override
     public boolean Login(String email, String password) {
         Document foundData = users.find(Filters.and(
                 eq("email", email),
                 eq("password", password))).first();
         return foundData != null;
     }
+
 
     public boolean login(String email, String password) {
         User foundUser = findUser(email);

@@ -1,4 +1,7 @@
+package UserDataBase;
+
 import lombok.Data;
+
 import java.time.LocalDate;
 
 @Data
@@ -15,6 +18,14 @@ public class User {
         this.password = password;
         this.name = name;
         this.lastname = lastname;
+        createdAt = LocalDate.now();
+    }
+
+    public User(String email) {
+        this.email = email;
+    }
+
+    public User() {
 
     }
 
@@ -22,7 +33,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", active=" + active +
